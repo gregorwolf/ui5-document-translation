@@ -1,0 +1,24 @@
+<mvc:View controllerName="demo.documenttranslation.controller.Translate"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified"
+    xmlns:m="sap.m">
+    <m:Page id="page" title="{i18n>title}">
+        <m:content>
+            <l:VerticalLayout 
+                id="fileUploadLayout">
+                <u:FileUploader
+                    id="fileUploader"
+                    name="file"
+                    useMultipart="true"
+                    uploadUrl="/document-translation/translation?sourceLanguage=en-US&amp;targetLanguage=de-DE&amp;strictMode=false"
+                    tooltip="Upload file for translation"
+                    uploadComplete="handleUploadComplete"/>
+                <m:Button
+                    id="fileUploadButton"
+                    text="Upload File"
+                    press="handleUploadPress"/>
+            </l:VerticalLayout>
+        </m:content>
+    </m:Page>
+</mvc:View>
