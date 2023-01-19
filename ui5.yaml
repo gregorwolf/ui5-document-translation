@@ -20,6 +20,10 @@ server:
             pathPrefix: /sapdocumenttranslation
             url: https://sandbox.api.sap.com
             destination: API_Sandox
+          - path: /test/document-translation
+            pathPrefix: /sapdocumenttranslation
+            url: https://sandbox.api.sap.com
+            destination: API_Sandox
 #            pathPrefix: /api/v1
 #            url: https://document-translation.api.eu10.translationhub.cloud.sap
 #            destination: documenttranslation
