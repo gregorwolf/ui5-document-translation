@@ -1,0 +1,93 @@
+_schema-version: "3.2"
+ID: demo-documenttranslation
+version: 0.0.1
+modules:
+- name: demo-documenttranslation-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: demo-documenttranslation-destination-service
+    parameters:
+      content-target: true
+  - name: demo-documenttranslation-repo-host
+    parameters:
+      service-key:
+        name: demo-documenttranslation-repo-host-key
+  - name: demo-documenttranslation-uaa
+    parameters:
+      service-key:
+        name: demo-documenttranslation-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: demo-documenttranslation_html_repo_host
+          ServiceInstanceName: demo-documenttranslation-html5-srv
+          ServiceKeyName: demo-documenttranslation-repo-host-key
+          sap.cloud.service: demo-documenttranslation
+        - Authentication: OAuth2UserTokenExchange
+          Name: demo-documenttranslation_uaa
+          ServiceInstanceName: demo-documenttranslation-xsuaa-srv
+          ServiceKeyName: demo-documenttranslation-uaa-key
+          sap.cloud.service: demo-documenttranslation
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: demo-documenttranslation-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: demo-documenttranslation-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - demodocumenttranslation.zip
+      name: demodocumenttranslation
+      target-path: resources/
+- name: demodocumenttranslation
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: demo-documenttranslation-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: demo-documenttranslation-destination-service
+    service-plan: lite
+- name: demo-documenttranslation-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: demo-documenttranslation-xsuaa-srv
+    service-plan: application
+- name: demo-documenttranslation-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: demo-documenttranslation-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
