@@ -10,6 +10,7 @@
                 <u:FileUploader
                     id="fileUploader"
                     name="file"
+                    sendXHR="false"
                     useMultipart="true"
                     uploadUrl="/document-translation/translation?sourceLanguage=en-US&amp;targetLanguage=de-DE&amp;strictMode=false"
                     tooltip="Upload file for translation"
