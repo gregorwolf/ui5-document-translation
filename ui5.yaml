@@ -17,9 +17,12 @@ server:
           url: https://ui5.sap.com
         backend:
           - path: /document-translation
-            pathPrefix: /api/v1
-            url: https://document-translation.api.eu10.translationhub.cloud.sap
-            destination: documenttranslation
+            pathPrefix: /sapdocumenttranslation
+            url: https://sandbox.api.sap.com
+            destination: API_Sandox
+#            pathPrefix: /api/v1
+#            url: https://document-translation.api.eu10.translationhub.cloud.sap
+#            destination: documenttranslation
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

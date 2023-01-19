@@ -2,6 +2,8 @@
 
 This SAPUI5 Application uses the [SAP BTP Document Translation service](https://discovery-center.cloud.sap/serviceCatalog/document-translation-service/?region=all&tab=feature) to get a translation for an uploaded document.
 
+You can test the application by importing the file [API_Sandox](API_Sandox) as a new destination. Before you upload the file to BTP you have to get your API Key from [https://api.sap.com/settings](https://api.sap.com/settings) and replace ReplaceWithYourKey with it.
+
 ## Application Details
 |               |
 | ------------- |

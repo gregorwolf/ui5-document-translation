@@ -1,0 +1,9 @@
+Type=HTTP
+HTML5.Timeout=30000
+HTML5.DynamicDestination=true
+Authentication=NoAuthentication
+Name=API_Sandox
+WebIDEEnabled=true
+ProxyType=Internet
+URL=https\://sandbox.api.sap.com
+URL.headers.apikey=ReplaceWithYourKey
